@@ -4,8 +4,12 @@ import { getToken } from "@/lib/auth";
 const token = getToken();
 
 export const getPatients = async()=>{
+
+    const url = process.env.NEXT_PUBLIC_API_URL
+    const endpoit = "/patients"
+    
     try {
-        const res = await fetch("http://localhost:3000/patients",{
+        const res = await fetch(`${url}${endpoit}`,{
             method: "GET",
             cache: "no-store",
             headers: {
