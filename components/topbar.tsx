@@ -40,7 +40,7 @@ export function Topbar({ title, description }: TopbarProps) {
           <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search patients, consultations..."
+            placeholder="Buscar pacientes, consultas..."
             className="w-64 pl-9 bg-background"
           />
         </div>
@@ -49,9 +49,9 @@ export function Topbar({ title, description }: TopbarProps) {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="size-4" />
-              <Badge className="absolute -top-1 -right-1 size-5 rounded-full p-0 text-[10px] flex items-center justify-center">
+                {/* <Badge className="absolute -top-1 -right-1 size-5 rounded-full p-0 text-[10px] flex items-center justify-center">
                 3
-              </Badge>
+              </Badge> */}
               <span className="sr-only">Notifications</span>
             </Button>
           </DropdownMenuTrigger>

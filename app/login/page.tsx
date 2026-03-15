@@ -72,14 +72,14 @@ export default function LoginPage() {
           <div className="mb-4 flex size-14 items-center justify-center rounded-xl bg-primary text-primary-foreground">
             <Stethoscope className="size-7" />
           </div>
-          <h1 className="text-2xl font-bold text-foreground">DentalCare</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Consultation Management System</p>
+          <h1 className="text-2xl font-bold text-foreground">ODI-Dental</h1>
+          <p className="mt-1 text-sm text-muted-foreground">Sistema de Gestión de Consultas</p>
         </div>
 
         <Card>
           <CardHeader className="text-center">
-            <CardTitle>Welcome back</CardTitle>
-            <CardDescription>Sign in to your account to continue</CardDescription>
+            <CardTitle>Bienvenida/o</CardTitle>
+            <CardDescription>Inicie sesión en su cuenta para continuar</CardDescription>
           </CardHeader>
           <CardContent>
             {apiError && (
@@ -105,13 +105,13 @@ export default function LoginPage() {
                 </Field>
 
                 <Field data-invalid={!!errors.password}>
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <FieldLabel htmlFor="password">Contraseña</FieldLabel>
                   <div className="relative">
                     <Input
                       id="password"
                       name="password"
                       type={showPassword ? "text" : "password"}
-                      placeholder="Enter your password"
+                      placeholder="contraseña"
                       autoComplete="current-password"
                       aria-invalid={!!errors.password}
                     />
@@ -138,7 +138,7 @@ export default function LoginPage() {
 
               <Button type="submit" className="mt-6 w-full" disabled={isLoading}>
                 {isLoading && <Spinner className="mr-2" />}
-                {isLoading ? "Signing in..." : "Sign in"}
+                {isLoading ? "Ingresando..." : "Ingresar"}
               </Button>
             </form>
 

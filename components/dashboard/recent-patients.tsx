@@ -1,6 +1,9 @@
+"use client"
+
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { usePatients } from "@/hooks/getPatients"
 
 const recentPatients = [
   {
@@ -44,6 +47,10 @@ function getInitials(name: string) {
 }
 
 export function RecentPatients() {
+
+   const {data, isLoading, error} = usePatients();
+
+   
   return (
     <Card>
       <CardHeader>
@@ -51,25 +58,25 @@ export function RecentPatients() {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {recentPatients.map((patient) => (
+          {data && data.map((patient) => (
             <Link
               key={patient.id}
-              href={`/consultations?patient=${encodeURIComponent(patient.name)}`}
+              href={`/consultations?patient=${encodeURIComponent(patient.nombre)}`}
               className="flex items-center gap-3 rounded-lg p-2 transition-colors hover:bg-muted/50 -mx-2"
             >
               <Avatar className="size-9">
                 <AvatarFallback className="bg-primary/10 text-primary text-xs">
-                  {getInitials(patient.name)}
+                  {getInitials(patient.nombre)}
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate">{patient.name}</p>
+                <p className="text-sm font-medium truncate">{patient.nombre}</p>
                 <p className="text-xs text-muted-foreground truncate">
-                  {patient.reason}
+                  {patient.descipcion}
                 </p>
               </div>
               <span className="text-xs text-muted-foreground whitespace-nowrap">
-                {patient.lastVisit}
+                
               </span>
             </Link>
           ))}

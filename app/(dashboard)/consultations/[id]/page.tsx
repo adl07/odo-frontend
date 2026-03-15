@@ -43,7 +43,7 @@ function getInitials(name: string) {
 }
 
 function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString("en-US", {
+  return new Date(dateString).toLocaleString("es-AR", {
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -52,10 +52,10 @@ function formatDate(dateString: string) {
 }
 
 function formatDateTime(dateString: string) {
-  return new Date(dateString).toLocaleString("en-US", {
+  return new Date(dateString).toLocaleString("es-AR", {
+    day: "2-digit",
+    month: "2-digit", 
     year: "numeric",
-    month: "short",
-    day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
   })
@@ -75,8 +75,8 @@ export default function ConsultationDetailPage({
   return (
     <>
       <Topbar 
-        title="Consultation Details" 
-        description={`Viewing consultation #${id}`} 
+        title="Detalle de la Consulta" 
+        description={`Consulta #${id}`} 
       />
       <div className="flex-1 overflow-auto p-4 lg:p-6">
         <div className="mx-auto max-w-4xl space-y-6">
@@ -85,13 +85,13 @@ export default function ConsultationDetailPage({
             <Button variant="ghost" size="sm" asChild>
               <Link href="/consultations">
                 <ArrowLeft className="size-4 mr-2" />
-                Back to History
+                Volver al historial
               </Link>
             </Button>
             <Button asChild>
               <Link href={`/consultations/${id}/edit`}>
                 <Edit className="size-4 mr-2" />
-                Edit Consultation
+                Editar Consulta
               </Link>
             </Button>
           </div>
@@ -104,7 +104,7 @@ export default function ConsultationDetailPage({
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <User className="size-5" />
-                Patient Information
+                Información del Paciente
               </CardTitle>
               <CardAction>
                 <Badge variant="secondary" className="bg-success/10 text-success">
@@ -121,15 +121,15 @@ export default function ConsultationDetailPage({
                 </Avatar>
                 <div className="flex-1 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   <div>
-                    <p className="text-sm text-muted-foreground">Patient Name</p>
+                    <p className="text-sm text-muted-foreground">Nombre del Paciente</p>
                     <p className="font-medium">{data.nombre}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">National ID / DNI</p>
+                    <p className="text-sm text-muted-foreground">DNI</p>
                     <p className="font-medium">{data.dni}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">Consultation Date</p>
+                    <p className="text-sm text-muted-foreground">Día de la Consulta</p>
                     <p className="font-medium">{formatDate(data.fecha)}</p>
                   </div>
                 </div>
@@ -142,34 +142,34 @@ export default function ConsultationDetailPage({
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <FileText className="size-5" />
-                Clinical Information
+                Información Medica
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                <p className="text-sm font-medium text-muted-foreground mb-1">Reason for Consultation</p>
+                <p className="text-sm font-medium text-muted-foreground mb-1">Motivo de la consulta</p>
                 <p className="text-base">{data.descripcion}</p>
               </div>
 
               <Separator />
 
               <div>
-                <p className="text-sm font-medium text-muted-foreground mb-1">Diagnosis</p>
-                <p className="text-base leading-relaxed">{consultation.diagnosis}</p>
+                <p className="text-sm font-medium text-muted-foreground mb-1">Diagnóstico</p>
+                <p className="text-base leading-relaxed"></p>
               </div>
 
               <Separator />
 
               <div>
-                <p className="text-sm font-medium text-muted-foreground mb-1">Treatment Performed</p>
-                <p className="text-base leading-relaxed">{consultation.treatment}</p>
+                <p className="text-sm font-medium text-muted-foreground mb-1">Tratamiento realizado</p>
+                <p className="text-base leading-relaxed"></p>
               </div>
 
               <Separator />
 
               <div>
-                <p className="text-sm font-medium text-muted-foreground mb-1">Observations / Notes</p>
-                <p className="text-base leading-relaxed">{consultation.observations}</p>
+                <p className="text-sm font-medium text-muted-foreground mb-1">Observaciones / Notas</p>
+                <p className="text-base leading-relaxed"></p>
               </div>
             </CardContent>
           </Card>
@@ -180,12 +180,12 @@ export default function ConsultationDetailPage({
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Paperclip className="size-5" />
-                  Attachments
+                  Archivos adjuntos
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-3 sm:grid-cols-2">
-                  {consultation.attachments.map((attachment) => (
+                  {/* {consultation.attachments.map((attachment) => (
                     <div
                       key={attachment.id}
                       className="flex items-center justify-between rounded-lg border bg-muted/30 p-3"
@@ -204,7 +204,7 @@ export default function ConsultationDetailPage({
                         <span className="sr-only">Download {attachment.name}</span>
                       </Button>
                     </div>
-                  ))}
+                  ))} */}
                 </div>
               </CardContent>
             </Card>
@@ -215,18 +215,18 @@ export default function ConsultationDetailPage({
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Calendar className="size-5" />
-                Record Information
+                Registrar información
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <p className="text-sm text-muted-foreground">Created</p>
-                  <p className="font-medium">{formatDateTime(consultation.createdAt)}</p>
+                  <p className="font-medium">{formatDateTime(data.created_at)}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Last Updated</p>
-                  <p className="font-medium">{formatDateTime(consultation.updatedAt)}</p>
+                  <p className="text-sm text-muted-foreground">Ultima Actualización</p>
+                  <p className="font-medium">{formatDateTime(data.updated_at)}</p>
                 </div>
               </div>
             </CardContent>

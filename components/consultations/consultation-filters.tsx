@@ -61,7 +61,7 @@ export function ConsultationFilters() {
             <div className="relative flex-1 max-w-sm">
               <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="Search by patient name..."
+                placeholder="Buscar paciente por dni..."
                 value={searchName}
                 onChange={(e) => setSearchName(e.target.value)}
                 className="pl-9"
@@ -93,7 +93,7 @@ export function ConsultationFilters() {
           <Button asChild>
             <Link href="/consultations/new">
               <Plus className="size-4 mr-2" />
-              New Consultation
+              Nueva Consulta
             </Link>
           </Button>
         </div>

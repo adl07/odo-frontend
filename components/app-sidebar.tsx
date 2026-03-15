@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import {
   LayoutDashboard,
   Plus,
@@ -61,6 +61,12 @@ const settingsNavItems = [
 
 export function AppSidebar() {
   const pathname = usePathname()
+  const router = useRouter()
+
+  const closeSession =()=>{
+    localStorage.removeItem('auth_token')
+    router.replace('/login')
+  }
 
   return (
     <Sidebar>
@@ -126,8 +132,8 @@ export function AppSidebar() {
                     <AvatarFallback className="bg-primary/10 text-primary text-xs">SM</AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col items-start text-left">
-                    <span className="text-sm font-medium">Dr. Sarah Mitchell</span>
-                    <span className="text-xs text-muted-foreground">General Dentist</span>
+                    <span className="text-sm font-medium">Iara Pereyra</span>
+                    <span className="text-xs text-muted-foreground">Odontologa</span>
                   </div>
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
@@ -139,7 +145,7 @@ export function AppSidebar() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-destructive focus:text-destructive">
+                <DropdownMenuItem className="text-destructive focus:text-destructive" onClick={closeSession}>
                   <LogOut className="mr-2 size-4" />
                   Cerrar Session
                 </DropdownMenuItem>

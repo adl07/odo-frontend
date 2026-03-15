@@ -17,23 +17,7 @@ const stats = [
     icon: Users,
     trend: "+8%",
     trendUp: true,
-  },
-  {
-    title: "Avg. Consultation Time",
-    value: "32 min",
-    description: "Within target range",
-    icon: Clock,
-    trend: "-5%",
-    trendUp: true,
-  },
-  {
-    title: "Monthly Revenue",
-    value: "$24,580",
-    description: "vs $22,100 last month",
-    icon: TrendingUp,
-    trend: "+11%",
-    trendUp: true,
-  },
+  }
 ]
 
 export function DashboardStats() {
@@ -49,18 +33,18 @@ export function DashboardStats() {
                 </p>
                 <div className="flex items-baseline gap-2">
                   <span className="text-2xl font-bold tracking-tight">
-                    {stat.value}
+                    
                   </span>
                   <span
                     className={`text-xs font-medium ${
                       stat.trendUp ? "text-success" : "text-destructive"
                     }`}
                   >
-                    {stat.trend}
+                    
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  {stat.description}
+                  
                 </p>
               </div>
               <div className="rounded-lg bg-primary/10 p-2.5">

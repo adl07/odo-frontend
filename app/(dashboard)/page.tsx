@@ -4,6 +4,7 @@ import { RecentConsultations } from "@/components/dashboard/recent-consultations
 import { RecentPatients } from "@/components/dashboard/recent-patients"
 import { QuickActions } from "@/components/dashboard/quick-actions"
 
+
 export default function DashboardPage() {
   return (
     <>

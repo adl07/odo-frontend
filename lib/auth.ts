@@ -37,10 +37,6 @@ export async function login(credentials: LoginCredentials): Promise<AuthResponse
   }
 
   const data = await response.json();
-
-  console.log('data recibida:', data)           // <-- ¿Qué muestra aquí?
-  console.log('access_token:', data.access_token) 
-  console.log(response.json()) 
   return data
 }
 
