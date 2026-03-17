@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Field, FieldLabel, FieldGroup, FieldError } from "@/components/ui/field"
 import { Spinner } from "@/components/ui/spinner"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { login, setToken } from "@/lib/auth"
+import { login, setToken, setTokenDoctor, setDoctorName } from "@/lib/auth"
 import { LoginSchema } from "../schema/login.schema"
 export default function LoginPage() {
   const router = useRouter()
@@ -55,8 +55,10 @@ export default function LoginPage() {
 
     try {
       const response = await login({ username, password })
-      console.log(response.access_token)
+      console.log(response)
       setToken(response.access_token)
+      setTokenDoctor(response.doctorId)
+      setDoctorName(response.doctorname)
       router.push("/")
     } catch (error) {
       setApiError(error instanceof Error ? error.message : "An error occurred during login")

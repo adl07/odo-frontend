@@ -28,6 +28,9 @@ export function ConsultationForm() {
 
   const {mutateAsync, data, isPending, error} = useCreatePatients()
 
+
+  const doctorId = localStorage.getItem('doctor_id')
+  
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
     if (!files) return
@@ -66,18 +69,23 @@ export function ConsultationForm() {
       nombre: formData.get("nombre") as string,
       dni: formData.get("dni") as string,
       date: formData.get("date") as string,
-      reason: formData.get("reason") as string,
-      diagnosis: formData.get("diagnosis") as string,
-      treatment: formData.get("treatment") as string,
-      observations: formData.get("observations") as string,
+      motivo: formData.get("motivo") as string,
+      diagnostico: formData.get("diagnosis") as string,
+      tratamiento: formData.get("treatment") as string,
+      observaciones: formData.get("observations") as string,
+      doctorid: doctorId as string
+
+      
     }
+
+    console.log(data)
 
     // Basic validation
     const newErrors: Record<string, string> = {}
     if (!data.nombre) newErrors.nombre = "El nombre del paciente es requerido"
     if (!data.dni) newErrors.dni = "DNI es requerido"
-    if (!data.date) newErrors.date = "Date es requerido"
-    if (!data.reason) newErrors.reason = "Reason es requerido"
+    if (!data.date) newErrors.date = "Fecha es requerido"
+    if (!data.motivo) newErrors.motivo = "Motivo de consulta es requerido"
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
@@ -86,6 +94,7 @@ export function ConsultationForm() {
     }
     
     try {
+      console.log('data', data)
       await mutateAsync(data)
       router.push("/consultations")
 
@@ -151,15 +160,26 @@ export function ConsultationForm() {
         </CardHeader>
         <CardContent>
           <FieldGroup>
-            <Field data-invalid={!!errors.reason}>
+            <Field data-invalid={!!errors.motivo}>
               <FieldLabel htmlFor="reason">Motivo de la Consulta *</FieldLabel>
               <Input
-                id="reason"
-                name="reason"
+                id="motivo"
+                name="motivo"
                 placeholder="por ejemplo, chequeo de rutina, dolor de muelas, limpieza"
-                aria-invalid={!!errors.reason}
+                aria-invalid={!!errors.motivo}
               />
-              {errors.reason && <FieldError>{errors.reason}</FieldError>}
+              {errors.motivo && <FieldError>{errors.motivo}</FieldError>}
+            </Field>
+
+            <Field data-invalid={!!errors.codigo}>
+              <FieldLabel htmlFor="reason">Codigos</FieldLabel>
+              <Input
+                id="codigo"
+                name="codigo"
+                placeholder="por ejemplo, 000112"
+                aria-invalid={!!errors.codigo}
+              />
+              {errors.codigo && <FieldError>{errors.codigo}</FieldError>}
             </Field>
 
             <Field>

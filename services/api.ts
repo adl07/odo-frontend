@@ -39,20 +39,24 @@ interface PatientInterface{
       nombre: string,
       dni: string,
       date: string,
-      reason: string,
-      diagnosis?: string,
-      treatment?: string,
-      observations?: string,
+      motivo: string,
+      diagnostico?: string,
+      codigo?: string,
+      tratamiento?: string,
+      observaciones?: string,
+      doctorid: string
 }
 
 export interface ConsultInterface{
       nombre: string,
       dni: string,
       date: string,
-      reason: string,
-      diagnosis?: string,
-      treatment?: string,
-      observations?: string,
+      motivo: string,
+      diagnostico?: string,
+      codigo?: string,
+      tratamiento?: string,
+      observaciones?: string,
+      doctorid: string
 }
 
 export const createPatient=async(data: PatientInterface ) =>{
@@ -64,8 +68,15 @@ export const createPatient=async(data: PatientInterface ) =>{
                 fecha: data.date,
                 dni: data.dni,
                 nombre: data.nombre,
-                descripcion: data.reason
+                motivo: data.motivo,
+                diagnostico: data.diagnostico,
+                codigo: data.codigo,
+                tratamiento: data.tratamiento,
+                observaciones: data.observaciones,
+                doctorid: data.doctorid
     }
+
+    console.log('payload:', payload)
     try {
         const response = await fetch(`${url}${endpoit}`, {
             method: 'POST',
@@ -121,7 +132,12 @@ export const updateConsultById = async(id:string, data: ConsultInterface )=>{
         dni: data.dni,
         nombre: data.nombre,
         fecha: data.date,
-        descripcion: data.reason,
+        motivo: data.motivo,
+        diagnosis: data.diagnostico,
+        codigo: data.codigo,
+        treatment: data.tratamiento,
+        observations: data.observaciones,
+        doctorId: data.doctorId
     }
 
     console.log(payload)

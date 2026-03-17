@@ -148,28 +148,34 @@ export default function ConsultationDetailPage({
             <CardContent className="space-y-6">
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">Motivo de la consulta</p>
-                <p className="text-base">{data.descripcion}</p>
+                <p className="text-base">{data.motivo}</p>
               </div>
 
               <Separator />
 
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">Diagnóstico</p>
-                <p className="text-base leading-relaxed"></p>
+                <p className="text-base leading-relaxed">{data.diagnostico}</p>
+              </div>
+
+               <Separator />
+              <div>
+                <p className="text-sm font-medium text-muted-foreground mb-1">Codigos</p>
+                <p className="text-base leading-relaxed">{data.codigo}</p>
               </div>
 
               <Separator />
 
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">Tratamiento realizado</p>
-                <p className="text-base leading-relaxed"></p>
+                <p className="text-base leading-relaxed">{data.tratamiento}</p>
               </div>
 
               <Separator />
 
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-1">Observaciones / Notas</p>
-                <p className="text-base leading-relaxed"></p>
+                <p className="text-base leading-relaxed">{data.observaciones}</p>
               </div>
             </CardContent>
           </Card>

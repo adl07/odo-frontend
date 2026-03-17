@@ -22,16 +22,19 @@ interface AttachedFile {
 
 // This would typically be fetched from a database
 export interface existingConsultation {
+  doctorid: string
   id: string,
   nombre: string,
   dni: string,
   date: string,
-  reason: string,
-  diagnosis?: string ,
-  treatment?: string,
-  observations?: string
+  motivo: string,
+  diagnostico?: string ,
+  codigo?: string,
+  tratamiento?: string,
+  observaciones?: string
   attachments?: [] | [],
 }
+
 
 interface EditConsultationFormProps {
   consultationId: string,
@@ -80,21 +83,23 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
 
     const formData = new FormData(e.currentTarget)
     const data = {
+      doctorid: dataConsultation.doctorid as string,
       nombre: formData.get("nombre") as string,
       dni: formData.get("dni") as string,
       date: formData.get("date") as string,
-      reason: formData.get("reason") as string,
-      diagnosis: formData.get("diagnosis") as string,
-      treatment: formData.get("treatment") as string,
-      observations: formData.get("observations") as string,
+      motivo: formData.get("motivo") as string,
+      codigo: formData.get("codigo") as string,
+      diagnostico: formData.get("diagnostico") as string,
+      tratamiento: formData.get("tratamiento") as string,
+      observaciones: formData.get("observaciones") as string,
     }
 
     // Basic validation
     const newErrors: Record<string, string> = {}
-    if (!data.nombre) newErrors.nombre = "Paciente name is required"
+    if (!data.nombre) newErrors.nombre = "Nombre del paciente es requerido"
     if (!data.dni) newErrors.dni = "DNI is required"
     if (!data.date) newErrors.date = "Date is required"
-    if (!data.reason) newErrors.reason = "Reason is required"
+    if (!data.motivo) newErrors.motivo = "Motivo is required"
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
@@ -170,54 +175,65 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
       <Card className="mt-6">
         <CardHeader>
           <CardTitle>Clinical Information</CardTitle>
-          <CardDescription>Edit the consultation details and findings</CardDescription>
+          <CardDescription>Editar los detalles y hallazgos de la consulta</CardDescription>
         </CardHeader>
         <CardContent>
           <FieldGroup>
             <Field data-invalid={!!errors.reason}>
-              <FieldLabel htmlFor="reason">Reason for Consultation *</FieldLabel>
+              <FieldLabel htmlFor="reason">Motivo de la Consulta</FieldLabel>
               <Input
-                id="reason"
-                name="reason"
-                placeholder="e.g., Routine checkup, Tooth pain, Cleaning"
-                defaultValue={dataConsultation.reason}
-                aria-invalid={!!errors.reason}
+                id="motivo"
+                name="motivo"
+                placeholder="por ejemplo, chequeo de rutina, dolor de muelas, limpieza"
+                defaultValue={dataConsultation.motivo}
+                aria-invalid={!!errors.motivo}
               />
-              {errors.reason && <FieldError>{errors.reason}</FieldError>}
+              {errors.motivo && <FieldError>{errors.motivo}</FieldError>}
             </Field>
 
             <Field>
-              <FieldLabel htmlFor="diagnosis">Diagnosis</FieldLabel>
+              <FieldLabel htmlFor="diagnostico">Diagnostico</FieldLabel>
               <Textarea
-                id="diagnosis"
-                name="diagnosis"
-                placeholder="Enter the diagnosis based on examination findings"
-                defaultValue={dataConsultation.diagnosis}
+                id="diagnostico"
+                name="diagnostico"
+                placeholder="Ingrese al diagnóstico según los hallazgos del examen"
+                defaultValue={dataConsultation.diagnostico}
                 className="min-h-24"
               />
               <FieldDescription>
-                Describe the clinical findings and diagnosis
+                Describir los hallazgos clínicos y diagnósticos
               </FieldDescription>
             </Field>
 
+            <Field data-invalid={!!errors.codigo}>
+              <FieldLabel htmlFor="reason">Codigos</FieldLabel>
+              <Input
+                id="codigo"
+                name="codigo"
+                placeholder="por ejemplo, 000112"
+                aria-invalid={!!errors.codigo}
+              />
+              {errors.codigo && <FieldError>{errors.codigo}</FieldError>}
+            </Field>
+
             <Field>
-              <FieldLabel htmlFor="treatment">Treatment Performed</FieldLabel>
+              <FieldLabel htmlFor="treatment">Tratamiento realizado</FieldLabel>
               <Textarea
                 id="treatment"
                 name="treatment"
                 placeholder="Describe the treatment or procedure performed"
-                defaultValue={dataConsultation.treatment}
+                defaultValue={dataConsultation.tratamiento}
                 className="min-h-24"
               />
             </Field>
 
             <Field>
-              <FieldLabel htmlFor="observations">Observations / Notes</FieldLabel>
+              <FieldLabel htmlFor="observaciones">Observations / Notes</FieldLabel>
               <Textarea
-                id="observations"
-                name="observations"
+                id="observaciones"
+                name="observaciones"
                 placeholder="Additional notes, follow-up instructions, or recommendations"
-                defaultValue={dataConsultation.observations}
+                defaultValue={dataConsultation.observaciones}
                 className="min-h-24"
               />
             </Field>

@@ -13,6 +13,8 @@ export interface RegisterData {
 
 export interface AuthResponse {
   access_token: string
+  doctorId: string
+  doctorname: string
 }
 
 export interface AuthError {
@@ -21,7 +23,6 @@ export interface AuthError {
 }
 
 export async function login(credentials: LoginCredentials): Promise<AuthResponse> {
-  console.log(credentials)
   const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: "POST",
     headers: {
@@ -30,13 +31,14 @@ export async function login(credentials: LoginCredentials): Promise<AuthResponse
     body: JSON.stringify(credentials),
   })
 
-  console.log('response:', response)
+  
   if (!response.ok) {
     const error: AuthError = await response.json()
     throw new Error(error.message || "Invalid email or password")
   }
 
   const data = await response.json();
+  console.log('response:', data)
   return data
 }
 
@@ -78,4 +80,16 @@ export function removeToken() {
 
 export function isAuthenticated(): boolean {
   return !!getToken()
+}
+
+export function setTokenDoctor(id: string){
+  if( typeof window !== "undefined"){
+    localStorage.setItem("doctor_id", id)
+  }
+}
+
+export function setDoctorName(doctorname: string){
+  if( typeof window !== "undefined"){
+    localStorage.setItem("doctor_name", doctorname)
+  }
 }
