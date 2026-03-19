@@ -126,14 +126,14 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
     <form onSubmit={handleSubmit}>
       <Card>
         <CardHeader>
-          <CardTitle>Paciente Information</CardTitle>
-          <CardDescription>Edit the patient details for this consultation</CardDescription>
+          <CardTitle>Información del Paciente</CardTitle>
+          <CardDescription>Edite los detalles del paciente para esta consulta</CardDescription>
         </CardHeader>
         <CardContent>
           <FieldGroup>
             <div className="grid gap-6 sm:grid-cols-2">
               <Field data-invalid={!!errors.nombre}>
-                <FieldLabel htmlFor="nombre">Paciente Name *</FieldLabel>
+                <FieldLabel htmlFor="nombre">Nombre *</FieldLabel>
                 <Input
                   id="nombre"
                   name="nombre"
@@ -145,7 +145,7 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
               </Field>
 
               <Field data-invalid={!!errors.dni}>
-                <FieldLabel htmlFor="dni">National ID / DNI *</FieldLabel>
+                <FieldLabel htmlFor="dni">DNI *</FieldLabel>
                 <Input
                   id="dni"
                   name="dni"
@@ -158,7 +158,7 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
             </div>
 
             <Field data-invalid={!!errors.date}>
-              <FieldLabel htmlFor="date">Consultation Date *</FieldLabel>
+              <FieldLabel htmlFor="date">Fecha de Consulta *</FieldLabel>
               <Input
                 id="date"
                 name="date"
@@ -174,7 +174,7 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
 
       <Card className="mt-6">
         <CardHeader>
-          <CardTitle>Clinical Information</CardTitle>
+          <CardTitle>Información Clínica</CardTitle>
           <CardDescription>Editar los detalles y hallazgos de la consulta</CardDescription>
         </CardHeader>
         <CardContent>
@@ -228,7 +228,7 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
             </Field>
 
             <Field>
-              <FieldLabel htmlFor="observaciones">Observations / Notes</FieldLabel>
+              <FieldLabel htmlFor="observaciones">Observaciones / Notas</FieldLabel>
               <Textarea
                 id="observaciones"
                 name="observaciones"
@@ -243,7 +243,7 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
 
       <Card className="mt-6">
         <CardHeader>
-          <CardTitle>Attachments</CardTitle>
+          <CardTitle>Adjuntos</CardTitle>
           <CardDescription>Manage X-rays, photos, or other relevant documents</CardDescription>
         </CardHeader>
         <CardContent>
@@ -276,7 +276,7 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
                       onClick={() => removeFile(file.id)}
                     >
                       <X className="size-4" />
-                      <span className="sr-only">Remove file</span>
+                      <span className="sr-only">Quitar Archivo</span>
                     </Button>
                   </div>
                 ))}
@@ -285,7 +285,7 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
 
             <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/25 p-8 transition-colors hover:border-muted-foreground/50">
               <Upload className="mb-3 size-10 text-muted-foreground" />
-              <p className="mb-1 text-sm font-medium">Add more files</p>
+              <p className="mb-1 text-sm font-medium">Agregar Archivos</p>
               <p className="text-xs text-muted-foreground">
                 Supports images (JPG, PNG) and documents (PDF)
               </p>

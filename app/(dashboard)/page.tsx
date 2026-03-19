@@ -21,7 +21,7 @@ export default function DashboardPage() {
               <RecentConsultations />
             </div>
             <div className="space-y-6">
-              <QuickActions />
+              {/*<QuickActions />*/}
               <RecentPatients />
             </div>
           </div>

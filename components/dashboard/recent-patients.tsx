@@ -54,7 +54,7 @@ export function RecentPatients() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Recently Attended</CardTitle>
+        <CardTitle>Recién Atendidos</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">

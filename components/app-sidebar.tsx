@@ -65,6 +65,8 @@ export function AppSidebar() {
 
   const closeSession =()=>{
     localStorage.removeItem('auth_token')
+    localStorage.removeItem('doctor_id')
+    localStorage.removeItem('doctor_name')
     router.replace('/login')
   }
 

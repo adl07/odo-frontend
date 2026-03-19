@@ -155,7 +155,7 @@ export function ConsultationForm() {
 
       <Card className="mt-6">
         <CardHeader>
-          <CardTitle>Clinical Information</CardTitle>
+          <CardTitle>Información Clínica</CardTitle>
           <CardDescription>Descripción de la consulta *</CardDescription>
         </CardHeader>
         <CardContent>

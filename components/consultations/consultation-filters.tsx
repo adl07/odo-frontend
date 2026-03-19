@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import Link from "next/link"
 import { Search, Filter, Plus, X } from "lucide-react"
 
@@ -15,6 +15,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
+import { string } from "zod"
+import { useFilterConsult } from "@/hooks/filterConsult"
 
 const reasonOptions = [
   { value: "all", label: "All Reasons" },
@@ -37,6 +39,8 @@ export function ConsultationFilters() {
   const [dateTo, setDateTo] = useState("")
   const [showFilters, setShowFilters] = useState(false)
 
+  const {filterValues} = useFilterConsult()
+
   const activeFiltersCount = [
     searchName,
     searchDni,
@@ -45,12 +49,22 @@ export function ConsultationFilters() {
     dateTo,
   ].filter(Boolean).length
 
+
+  const handleValueFilter =(searchDni: string)=>{
+    const filters: string[] = []
+
+    if(searchDni) filters.push(searchDni)
+      filterValues(filters)
+  }
+
+
   const clearFilters = () => {
     setSearchName("")
     setSearchDni("")
     setSelectedReason("all")
     setDateFrom("")
     setDateTo("")
+    filterValues(null)
   }
 
   return (
@@ -67,14 +81,20 @@ export function ConsultationFilters() {
                 className="pl-9"
               />
             </div>
-
+            
+            <Button  
+              variant="outline" 
+              className="sm:w-auto" 
+              onClick={()=>handleValueFilter(searchName)}>
+              Buscar
+            </Button>
             <Button
               variant="outline"
               onClick={() => setShowFilters(!showFilters)}
               className="sm:w-auto"
             >
               <Filter className="size-4 mr-2" />
-              Filters
+              Filtros
               {activeFiltersCount > 0 && (
                 <Badge variant="secondary" className="ml-2 size-5 rounded-full p-0 text-xs">
                   {activeFiltersCount}
@@ -82,20 +102,15 @@ export function ConsultationFilters() {
               )}
             </Button>
 
+
             {activeFiltersCount > 0 && (
               <Button variant="ghost" size="sm" onClick={clearFilters}>
                 <X className="size-4 mr-1" />
-                Clear
+                Limpiar Filtros
               </Button>
             )}
           </div>
-
-          <Button asChild>
-            <Link href="/consultations/new">
-              <Plus className="size-4 mr-2" />
-              Nueva Consulta
-            </Link>
-          </Button>
+          
         </div>
 
         {showFilters && (
@@ -110,7 +125,7 @@ export function ConsultationFilters() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Reason</label>
+              <label className="text-sm font-medium">Motivos</label>
               <Select value={selectedReason} onValueChange={setSelectedReason}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select reason" />
@@ -126,7 +141,7 @@ export function ConsultationFilters() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">From Date</label>
+              <label className="text-sm font-medium">Desde</label>
               <Input
                 type="date"
                 value={dateFrom}
@@ -135,7 +150,7 @@ export function ConsultationFilters() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">To Date</label>
+              <label className="text-sm font-medium">Hasta</label>
               <Input
                 type="date"
                 value={dateTo}

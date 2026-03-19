@@ -24,7 +24,7 @@ export default function EditConsultationPage({
     <>
       <Topbar 
         title="Edit Consultation" 
-        description={`Editing consultation #${id}`} 
+        description={`Editando Consulta #${id}`} 
       />
       <div className="flex-1 overflow-auto p-4 lg:p-6">
         <div className="mx-auto max-w-3xl">
@@ -32,7 +32,7 @@ export default function EditConsultationPage({
             <Button variant="ghost" size="sm" asChild>
               <Link href={`/consultations/${id}`}>
                 <ArrowLeft className="size-4 mr-2" />
-                Back to Details
+                Volver al Detalle
               </Link>
             </Button>
           </div>

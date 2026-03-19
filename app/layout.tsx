@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import  QueryClientProvider from '../providers/query-providers';
+import { StoreProvider } from '@/providers/store-providers';
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
@@ -38,11 +39,12 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="font-sans antialiased">
-        <QueryClientProvider>
+        <StoreProvider>
+          <QueryClientProvider>
             {children}
-          <Analytics />
-        </QueryClientProvider>
-        
+            <Analytics />
+          </QueryClientProvider>
+        </StoreProvider>
       </body>
     </html>
   )

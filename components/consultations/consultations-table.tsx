@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Link from "next/link"
 import { Eye, Edit, MoreHorizontal, ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -23,6 +23,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { getPatients } from "@/services/api"
+import { useSelector } from "react-redux"
+import { RootState } from "@/store/store"
 
 const consultations = [
   {
@@ -144,11 +146,18 @@ export function ConsultationsTable() {
   const totalPages = Math.ceil(consultations.length / itemsPerPage)
   const [patients, setPatients] = useState([]);
 
+  const filterPatient = useSelector((state: RootState) => state.valueFilter.value)
+
+  const handlePatients = useCallback(()=>{
+      if(!filterPatient) return;
+      
+  },[])
+
   useEffect(()=>{
     const loadingPatients = async ()=>{
       const getAllPatients = await getPatients();
       console.log(getAllPatients)
-      setPatients(getAllPatients)
+      setPatients(getAllPatients || [])
     }
 
     loadingPatients();
@@ -162,17 +171,17 @@ export function ConsultationsTable() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Patient</TableHead>
+              <TableHead>Paciente</TableHead>
               <TableHead className="hidden sm:table-cell">DNI</TableHead>
-              <TableHead className="hidden md:table-cell">Date</TableHead>
-              <TableHead className="hidden lg:table-cell">Reason</TableHead>
-              <TableHead className="hidden xl:table-cell">Diagnosis</TableHead>
-              <TableHead>Status</TableHead>
+              <TableHead className="hidden md:table-cell">Fecha</TableHead>
+              <TableHead className="hidden lg:table-cell">Motivo</TableHead>
+              <TableHead className="hidden xl:table-cell">Diagnostico</TableHead>
+              <TableHead>Estado</TableHead>
               <TableHead className="w-[50px]"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {patients.map((patient) => (
+            {patients.filter((p)=> !filterPatient || p.dni?.includes(filterPatient)).map((patient) => (
               <TableRow key={patient.id}>
                 <TableCell>
                   <div>
