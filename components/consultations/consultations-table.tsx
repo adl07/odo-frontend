@@ -147,6 +147,9 @@ export function ConsultationsTable() {
   const [patients, setPatients] = useState([]);
 
   const filterPatient = useSelector((state: RootState) => state.valueFilter.value)
+  const doctorId = localStorage.getItem('doctor_id')
+
+  
 
   const handlePatients = useCallback(()=>{
       if(!filterPatient) return;
@@ -156,7 +159,6 @@ export function ConsultationsTable() {
   useEffect(()=>{
     const loadingPatients = async ()=>{
       const getAllPatients = await getPatients();
-      console.log(getAllPatients)
       setPatients(getAllPatients || [])
     }
 
@@ -181,7 +183,7 @@ export function ConsultationsTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {patients.filter((p)=> !filterPatient || p.dni?.includes(filterPatient)).map((patient) => (
+            {patients.filter((p)=> p.doctorid?.includes(doctorId) && (!filterPatient || p.dni?.includes(filterPatient))).map((patient) => (
               <TableRow key={patient.id}>
                 <TableCell>
                   <div>

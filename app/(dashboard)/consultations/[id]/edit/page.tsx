@@ -18,8 +18,6 @@ export default function EditConsultationPage({
 
    const {data, isLoading, error} = useConsultById(id)
   
-     console.log('data:', data)
-  
   return (
     <>
       <Topbar 

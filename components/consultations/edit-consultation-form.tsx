@@ -124,7 +124,10 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
 
   return (
     <form onSubmit={handleSubmit}>
-      <Card>
+      {
+        dataConsultation && (
+          <>
+            <Card>
         <CardHeader>
           <CardTitle>Información del Paciente</CardTitle>
           <CardDescription>Edite los detalles del paciente para esta consulta</CardDescription>
@@ -315,6 +318,9 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
           {isSubmitting ? "Saving..." : "Save Changes"}
         </Button>
       </div>
+          </>
+        )
+      }
     </form>
   )
 }

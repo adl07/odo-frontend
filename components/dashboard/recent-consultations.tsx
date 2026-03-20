@@ -22,6 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { usePatients } from "@/hooks/getPatients"
+import { useEffect } from "react"
 
 const recentConsultations = [
   {
@@ -87,6 +88,12 @@ function getStatusBadge(status: string) {
 export function RecentConsultations() {
 
   const {data, isLoading, error} = usePatients();
+  const doctorId = localStorage.getItem('doctor_id')
+
+  useEffect(()=>{
+
+  },[data])
+
 
   if(isLoading) return <p>Cargando...</p>
   if(error) return <p>Error al cargar los pacientes</p>
@@ -113,7 +120,7 @@ export function RecentConsultations() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((consultation) => (
+            {data.filter((patient)=> patient.doctorid.includes(doctorId)).map((consultation) => (
               <TableRow key={consultation.id}>
                 <TableCell>
                   <div className="font-medium">{consultation.nombre}</div>

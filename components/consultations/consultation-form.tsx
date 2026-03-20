@@ -78,8 +78,6 @@ export function ConsultationForm() {
       
     }
 
-    console.log(data)
-
     // Basic validation
     const newErrors: Record<string, string> = {}
     if (!data.nombre) newErrors.nombre = "El nombre del paciente es requerido"
@@ -94,7 +92,6 @@ export function ConsultationForm() {
     }
     
     try {
-      console.log('data', data)
       await mutateAsync(data)
       router.push("/consultations")
 

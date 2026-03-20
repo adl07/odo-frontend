@@ -38,7 +38,6 @@ export async function login(credentials: LoginCredentials): Promise<AuthResponse
   }
 
   const data = await response.json();
-  console.log('response:', data)
   return data
 }
 
@@ -82,7 +81,7 @@ export function isAuthenticated(): boolean {
   return !!getToken()
 }
 
-export function setTokenDoctor(id: string){
+export function setDoctorId(id: string){
   if( typeof window !== "undefined"){
     localStorage.setItem("doctor_id", id)
   }

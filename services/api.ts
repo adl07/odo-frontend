@@ -76,7 +76,6 @@ export const createPatient=async(data: PatientInterface ) =>{
                 doctorid: data.doctorid
     }
 
-    console.log('payload:', payload)
     try {
         const response = await fetch(`${url}${endpoit}`, {
             method: 'POST',
@@ -116,7 +115,6 @@ export const getConsultById = async (id: string) =>{
         }
 
         const result = await response.json()
-        console.log(result)
         return result
     } catch (error) {
         console.log('Error al ejecutar getPatientById',error)
@@ -140,8 +138,6 @@ export const updateConsultById = async(id:string, data: ConsultInterface )=>{
         doctorId: data.doctorId
     }
 
-    console.log(payload)
-
     try {
         const response = await fetch(`${url}${endpoint}${id}`,{
             method: "PATCH",
@@ -157,7 +153,6 @@ export const updateConsultById = async(id:string, data: ConsultInterface )=>{
         }
 
         const result = await response.json()
-        console.log('result', result)
         return result 
 
     } catch (error) {
