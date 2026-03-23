@@ -5,38 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { usePatients } from "@/hooks/getPatients"
 
-const recentPatients = [
-  {
-    id: "1",
-    name: "Maria Garcia",
-    lastVisit: "Today",
-    reason: "Routine Checkup",
-  },
-  {
-    id: "2",
-    name: "John Smith",
-    lastVisit: "Today",
-    reason: "Tooth Pain",
-  },
-  {
-    id: "3",
-    name: "Ana Martinez",
-    lastVisit: "Today",
-    reason: "Teeth Cleaning",
-  },
-  {
-    id: "4",
-    name: "Carlos Rodriguez",
-    lastVisit: "Yesterday",
-    reason: "Crown Fitting",
-  },
-  {
-    id: "5",
-    name: "Laura Johnson",
-    lastVisit: "Yesterday",
-    reason: "Root Canal",
-  },
-]
+
 
 function getInitials(name: string) {
   return name
@@ -50,7 +19,8 @@ export function RecentPatients() {
 
    const {data, isLoading, error} = usePatients();
 
-   
+   const doctorId = localStorage.getItem('doctor_id')
+
   return (
     <Card>
       <CardHeader>
@@ -58,7 +28,7 @@ export function RecentPatients() {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {data && data.map((patient) => (
+          {data && data.filter((p) => p.doctorid === doctorId).map((patient) => (
             <Link
               key={patient.id}
               href={`/consultations?patient=${encodeURIComponent(patient.nombre)}`}

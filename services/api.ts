@@ -160,3 +160,30 @@ export const updateConsultById = async(id:string, data: ConsultInterface )=>{
         console.error('Error al ejecutar updateConsultById', error)
     }
 }
+
+export const deletePatientById = async (id: string) =>{
+
+    const url = process.env.NEXT_PUBLIC_API_URL
+    const endpoint = '/patients/'
+
+    try {
+        const response = await fetch(`${url}${endpoint}${id}`,{
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "Application/json"
+            }
+        })
+
+        if(!response.ok){
+            throw new Error('Ocurrio un error al ejecutar deletePatientById')
+        }
+
+        const result = response.status;    
+        return result
+
+    } catch (error) {
+        console.log('Ocurrio un error al ejectuar deletePatientById', error)
+        console.error('Ocurrio un error al ejectuar deletePatientById', error)
+    }
+}

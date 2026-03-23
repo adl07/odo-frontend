@@ -2,7 +2,7 @@
 
 
 import Link from "next/link"
-import { Eye, MoreHorizontal } from "lucide-react"
+import { Eye, MoreHorizontal, Trash2 } from "lucide-react"
 
 import { Card, CardContent, CardHeader, CardTitle, CardAction } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -22,7 +22,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { usePatients } from "@/hooks/getPatients"
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
+import { useDeletePatient } from "@/hooks/deletePatient"
 
 const recentConsultations = [
   {
@@ -88,11 +89,35 @@ function getStatusBadge(status: string) {
 export function RecentConsultations() {
 
   const {data, isLoading, error} = usePatients();
+  const {mutateAsync } = useDeletePatient();
   const doctorId = localStorage.getItem('doctor_id')
+
+  const handleDelete= async (id: string) =>{
+      try {
+        const response = await mutateAsync({id})
+        
+      } catch (error) {
+        console.error("Error al eliminar la consulta", error)
+      } finally{
+        
+      }
+    
+    }
 
   useEffect(()=>{
 
   },[data])
+
+
+  const deleteConsultId = useCallback(async (id: string)=>{
+      try {
+        const result = await handleDelete(id)
+        console.log('result:',result )
+
+      } catch (error) {
+        console.log('Error al ejecutar deleteConsultId', error)
+      }
+  },[])
 
 
   if(isLoading) return <p>Cargando...</p>
@@ -149,6 +174,12 @@ export function RecentConsultations() {
                           <Eye className="mr-2 size-4" />
                           Ver Detalle
                         </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Button variant="ghost" onClick={()=> deleteConsultId(consultation.id)}>
+                          <Trash2 className="mr-2 size-4" />
+                          Eliminar
+                        </Button>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
