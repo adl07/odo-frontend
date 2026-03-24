@@ -8,6 +8,6 @@ export const useUpdateConsultId=()=>{
     
     return useMutation({
         mutationFn: ({id, data}: {id: string, data: ConsultInterface}) => updateConsultById(id, data),
-        onSuccess: () => {queryClient.invalidateQueries({queryKey: ["updateConsultId"]})}
+        onSuccess: (_, variables) => {queryClient.invalidateQueries({queryKey: ["patientId", variables.id]})}
     })
 }

@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { useConsultById } from "@/hooks/getConsultById"
-import { use } from "react"
+import { use, useEffect } from "react"
 import { da, es } from "date-fns/locale"
 import { format, parseISO } from "date-fns"
 
@@ -67,6 +67,11 @@ export default function ConsultationDetailPage({
 
   const {data, isLoading, error} = useConsultById(id)
 
+  useEffect(()=>{
+
+   },[data])
+
+  
   return (
     <>
       <Topbar 

@@ -26,7 +26,7 @@ export interface existingConsultation {
   id: string,
   nombre: string,
   dni: string,
-  date: string,
+  fecha: string,
   motivo: string,
   diagnostico?: string ,
   codigo?: string,
@@ -221,10 +221,10 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
             </Field>
 
             <Field>
-              <FieldLabel htmlFor="treatment">Tratamiento realizado</FieldLabel>
+              <FieldLabel htmlFor="tratamiento">Tratamiento realizado</FieldLabel>
               <Textarea
-                id="treatment"
-                name="treatment"
+                id="tratamiento"
+                name="tratamiento"
                 placeholder="Describe the treatment or procedure performed"
                 defaultValue={dataConsultation.tratamiento}
                 className="min-h-24"

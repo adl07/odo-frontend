@@ -131,11 +131,11 @@ export const updateConsultById = async(id:string, data: ConsultInterface )=>{
         nombre: data.nombre,
         fecha: data.date,
         motivo: data.motivo,
-        diagnosis: data.diagnostico,
+        diagnostico: data.diagnostico,
         codigo: data.codigo,
-        treatment: data.tratamiento,
-        observations: data.observaciones,
-        doctorId: data.doctorId
+        tratamiento: data.tratamiento,
+        observaciones: data.observaciones,
+        doctorid: data.doctorid
     }
 
     try {

@@ -7,7 +7,7 @@ import { Topbar } from "@/components/topbar"
 import { Button } from "@/components/ui/button"
 import { EditConsultationForm } from "@/components/consultations/edit-consultation-form"
 import { useConsultById } from "@/hooks/getConsultById"
-import { use } from "react"
+import { use, useEffect } from "react"
 
 export default function EditConsultationPage({
   params,
@@ -17,6 +17,10 @@ export default function EditConsultationPage({
   const { id } = use(params) 
 
    const {data, isLoading, error} = useConsultById(id)
+
+   useEffect(()=>{
+
+   },[data])
   
   return (
     <>
