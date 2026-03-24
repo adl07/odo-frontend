@@ -106,11 +106,6 @@ export default function ConsultationDetailPage({
                 <User className="size-5" />
                 Información del Paciente
               </CardTitle>
-              <CardAction>
-                <Badge variant="secondary" className="bg-success/10 text-success">
-                  {consultation.status === "completed" ? "Completed" : consultation.status}
-                </Badge>
-              </CardAction>
             </CardHeader>
             <CardContent>
               <div className="flex items-start gap-4">

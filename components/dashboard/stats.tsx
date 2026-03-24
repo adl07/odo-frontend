@@ -1,5 +1,11 @@
+"use client"
+
 import { Calendar, Users, Clock, TrendingUp } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import { useSelector } from "react-redux"
+import { RootState } from "../../store/store"
+
+
 
 const stats = [
   {
@@ -12,7 +18,7 @@ const stats = [
   },
   {
     title: "Total de Pacientes",
-    value: "1,284",
+    value: "6",
     description: "+24 this month",
     icon: Users,
     trend: "+8%",
@@ -20,7 +26,32 @@ const stats = [
   }
 ]
 
+
+
 export function DashboardStats() {
+
+  const totalPatients = useSelector((state: RootState) => state.valueTotalPatient.count)
+  
+
+  const stats = [
+  {
+    title: "Consultas de hoy",
+    value: "0",
+    description: "3 completed, 5 remaining",
+    icon: Calendar,
+    trend: "+12%",
+    trendUp: true,
+  },
+  {
+    title: "Total de Pacientes",
+    value: totalPatients,
+    description: "+24 this month",
+    icon: Users,
+    trend: "+8%",
+    trendUp: true,
+  }
+]
+
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {stats.map((stat) => (
@@ -44,7 +75,7 @@ export function DashboardStats() {
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  
+                  {stat.value}
                 </p>
               </div>
               <div className="rounded-lg bg-primary/10 p-2.5">

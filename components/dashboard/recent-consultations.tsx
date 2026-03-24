@@ -22,8 +22,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { usePatients } from "@/hooks/getPatients"
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useDeletePatient } from "@/hooks/deletePatient"
+import { Spinner } from "../ui/spinner"
+import { useDispatch } from "react-redux"
+import { AppDispatch } from "@/store/store"
+import { setCountPatient } from "@/store/valuePatientsSlice"
 
 const recentConsultations = [
   {
@@ -90,29 +94,37 @@ export function RecentConsultations() {
 
   const {data, isLoading, error} = usePatients();
   const {mutateAsync } = useDeletePatient();
+  const [loadingDelete, setLoadingDelete] = useState<boolean>(false)
   const doctorId = localStorage.getItem('doctor_id')
+  const dispatch = useDispatch<AppDispatch>()
+
+
 
   const handleDelete= async (id: string) =>{
+    setLoadingDelete(true)
       try {
         const response = await mutateAsync({id})
         
       } catch (error) {
         console.error("Error al eliminar la consulta", error)
       } finally{
-        
+        setLoadingDelete(false)
       }
     
     }
 
   useEffect(()=>{
+    if(data){
+      const countPatients = data?.filter((p)=> p.doctorid === doctorId).length
+      dispatch(setCountPatient(countPatients))
+    }
 
-  },[data])
+  },[data, doctorId, dispatch])
 
 
   const deleteConsultId = useCallback(async (id: string)=>{
       try {
         const result = await handleDelete(id)
-        console.log('result:',result )
 
       } catch (error) {
         console.log('Error al ejecutar deleteConsultId', error)
@@ -176,9 +188,9 @@ export function RecentConsultations() {
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild>
-                        <Button variant="ghost" onClick={()=> deleteConsultId(consultation.id)}>
-                          <Trash2 className="mr-2 size-4" />
-                          Eliminar
+                        <Button variant="ghost" onClick={()=> deleteConsultId(consultation.id)} disabled={loadingDelete}>
+                          {loadingDelete ? <Spinner className="mr-2" /> : <Trash2 className="mr-2 size-4" />}
+                          {loadingDelete ? "Eliminando..." : "Eliminar"}
                         </Button>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
