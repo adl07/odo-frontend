@@ -25,6 +25,8 @@ import {
 import { getPatients } from "@/services/api"
 import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
+import { format } from "date-fns"
+import { es } from "date-fns/locale"
 
 const consultations = [
   {
@@ -133,11 +135,11 @@ function getStatusBadge(status: string) {
 }
 
 function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  })
+    const datePart = dateString.split('T')[0]
+    const [year, month, day] = datePart.split('-').map(Number)
+    const date = new Date(year, month - 1, day)
+    return format(date, "d-M-yyyy", { locale: es })
+  
 }
 
 export function ConsultationsTable() {
@@ -221,14 +223,14 @@ export function ConsultationsTable() {
                       <DropdownMenuItem asChild>
                         <Link href={`/consultations/${patient.id}`}>
                           <Eye className="mr-2 size-4" />
-                          View Details
+                          Ver Detalles
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem asChild>
                         <Link href={`/consultations/${patient.id}/edit`}>
                           <Edit className="mr-2 size-4" />
-                          Edit Consultation
+                          Editar Consulta
                         </Link>
                       </DropdownMenuItem>
                     </DropdownMenuContent>

@@ -312,11 +312,11 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
           onClick={() => router.back()}
           disabled={isSubmitting}
         >
-          Cancel
+          Cancelar
         </Button>
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting && <Spinner className="mr-2" />}
-          {isSubmitting ? "Saving..." : "Save Changes"}
+          {isSubmitting ? "Guardando..." : "Guardar Cambios"}
         </Button>
       </div>
           </>

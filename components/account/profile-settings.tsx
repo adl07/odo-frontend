@@ -122,7 +122,7 @@ export function ProfileSettings() {
           <div className="mt-6 flex justify-end">
             <Button type="submit" disabled={isSaving}>
               {isSaving && <Spinner className="mr-2" />}
-              {isSaving ? "Saving..." : "Save Changes"}
+              {isSaving ? "Guardando..." : "Guardar Cambios"}
             </Button>
           </div>
         </form>
