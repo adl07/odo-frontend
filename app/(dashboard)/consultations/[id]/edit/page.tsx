@@ -38,7 +38,8 @@ export default function EditConsultationPage({
               </Link>
             </Button>
           </div>
-          <EditConsultationForm consultationId={id} dataConsultation={data} />
+          {isLoading && <p>Cargando...</p>}
+          {data && <EditConsultationForm consultationId={id} dataConsultation={data} />}
         </div>
       </div>
     </>

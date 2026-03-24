@@ -86,7 +86,7 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
       doctorid: dataConsultation.doctorid as string,
       nombre: formData.get("nombre") as string,
       dni: formData.get("dni") as string,
-      date: formData.get("date") as string,
+      fecha: formData.get("date") as string,
       motivo: formData.get("motivo") as string,
       codigo: formData.get("codigo") as string,
       diagnostico: formData.get("diagnostico") as string,
@@ -98,7 +98,7 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
     const newErrors: Record<string, string> = {}
     if (!data.nombre) newErrors.nombre = "Nombre del paciente es requerido"
     if (!data.dni) newErrors.dni = "DNI is required"
-    if (!data.date) newErrors.date = "Date is required"
+    if (!data.fecha) newErrors.date = "Date is required"
     if (!data.motivo) newErrors.motivo = "Motivo is required"
 
     if (Object.keys(newErrors).length > 0) {
@@ -166,7 +166,7 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
                 id="date"
                 name="date"
                 type="date"
-                defaultValue={dataConsultation.date}
+                defaultValue={dataConsultation.fecha?.split('T')[0]}
                 aria-invalid={!!errors.date}
               />
               {errors.date && <FieldError>{errors.date}</FieldError>}

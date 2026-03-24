@@ -45,7 +45,10 @@ function getInitials(name: string) {
 }
 
 function formatDate(dateString: string) {
-  return format(parseISO(dateString), "EEEE, d 'de' MMMM 'de' yyyy", { locale: es })
+  const datePart = dateString.split('T')[0]
+  const [year, month, day] = datePart.split('-').map(Number)
+  const date = new Date(year, month - 1, day)
+  return format(date, "EEEE, d 'de' MMMM 'de' yyyy", { locale: es })
 }
 
 function formatDateTime(dateString: string) {

@@ -50,7 +50,7 @@ interface PatientInterface{
 export interface ConsultInterface{
       nombre: string,
       dni: string,
-      date: string,
+      fecha: string,
       motivo: string,
       diagnostico?: string,
       codigo?: string,
@@ -129,7 +129,7 @@ export const updateConsultById = async(id:string, data: ConsultInterface )=>{
     const payload = {
         dni: data.dni,
         nombre: data.nombre,
-        fecha: data.date,
+        fecha: data.fecha,
         motivo: data.motivo,
         diagnostico: data.diagnostico,
         codigo: data.codigo,
