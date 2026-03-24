@@ -215,6 +215,7 @@ export function EditConsultationForm({ consultationId, dataConsultation }: EditC
                 name="codigo"
                 placeholder="por ejemplo, 000112"
                 aria-invalid={!!errors.codigo}
+                defaultValue={dataConsultation.codigo}
               />
               {errors.codigo && <FieldError>{errors.codigo}</FieldError>}
             </Field>

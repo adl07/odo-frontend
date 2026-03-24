@@ -11,6 +11,8 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { useConsultById } from "@/hooks/getConsultById"
 import { use } from "react"
+import { da, es } from "date-fns/locale"
+import { format, parseISO } from "date-fns"
 
 // This would typically come from a database
 const consultation = {
@@ -43,12 +45,7 @@ function getInitials(name: string) {
 }
 
 function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleString("es-AR", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  })
+  return format(parseISO(dateString), "EEEE, d 'de' MMMM 'de' yyyy", { locale: es })
 }
 
 function formatDateTime(dateString: string) {
@@ -69,8 +66,6 @@ export default function ConsultationDetailPage({
   const { id } = use(params)
 
   const {data, isLoading, error} = useConsultById(id)
-
-  
 
   return (
     <>

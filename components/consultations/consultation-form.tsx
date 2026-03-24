@@ -69,6 +69,7 @@ export function ConsultationForm() {
       nombre: formData.get("nombre") as string,
       dni: formData.get("dni") as string,
       date: formData.get("date") as string,
+      codigo: formData.get("codigo") as string,
       motivo: formData.get("motivo") as string,
       diagnostico: formData.get("diagnosis") as string,
       tratamiento: formData.get("treatment") as string,
