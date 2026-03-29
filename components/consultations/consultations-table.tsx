@@ -180,7 +180,7 @@ export function ConsultationsTable() {
               <TableHead className="hidden md:table-cell">Fecha</TableHead>
               <TableHead className="hidden lg:table-cell">Motivo</TableHead>
               <TableHead className="hidden xl:table-cell">Diagnostico</TableHead>
-              <TableHead>Estado</TableHead>
+              <TableHead>Codigo</TableHead>
               <TableHead className="w-[50px]"></TableHead>
             </TableRow>
           </TableHeader>
@@ -210,7 +210,7 @@ export function ConsultationsTable() {
                 <TableCell className="hidden xl:table-cell text-muted-foreground max-w-[200px] truncate">
                   {patient.descripcion}
                 </TableCell>
-                <TableCell>{getStatusBadge(patient.dni)}</TableCell>
+                <TableCell>{patient.codigo ? getStatusBadge(patient.codigo) : getStatusBadge("-") }</TableCell>
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -231,6 +231,12 @@ export function ConsultationsTable() {
                         <Link href={`/consultations/${patient.id}/edit`}>
                           <Edit className="mr-2 size-4" />
                           Editar Consulta
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link href={`/consultations/${patient.id}/new`}>
+                          <Edit className="mr-2 size-4" />
+                          Cargar Consulta
                         </Link>
                       </DropdownMenuItem>
                     </DropdownMenuContent>

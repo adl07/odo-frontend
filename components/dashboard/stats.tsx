@@ -4,34 +4,14 @@ import { Calendar, Users, Clock, TrendingUp } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
-
-
-
-const stats = [
-  {
-    title: "Consultas de hoy",
-    value: "8",
-    description: "3 completed, 5 remaining",
-    icon: Calendar,
-    trend: "+12%",
-    trendUp: true,
-  },
-  {
-    title: "Total de Pacientes",
-    value: "6",
-    description: "+24 this month",
-    icon: Users,
-    trend: "+8%",
-    trendUp: true,
-  }
-]
-
+import { getDate } from "date-fns"
 
 
 export function DashboardStats() {
 
   const totalPatients = useSelector((state: RootState) => state.valueTotalPatient.count)
-  
+
+  console.log('totalPatients:', totalPatients)
 
   const stats = [
   {
